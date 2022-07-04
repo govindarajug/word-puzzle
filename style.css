@@ -1,0 +1,35 @@
+* {
+  margin: 0px;
+}
+
+body {
+  font-family: serif;
+  font-size: 18px;
+  margin: 10px auto;
+  width: 960px;
+}
+
+.grid {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  width: 12em;
+  gap: 0.2em
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  gap: 0.2em
+}
+
+.cell {
+  font-size: 2em;
+  width: 2em;
+  aspect-ratio: 1;
+  border: 1px solid lightgray;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: antiquewhite;
+}
