@@ -33,3 +33,12 @@ body {
   align-items: center;
   background-color: antiquewhite;
 }
+
+#done {
+  border: 1px solid grey;
+  border-radius: 12%;
+  width: fit-content;
+  padding: 0.2em 0.5em;
+  background-color: lightblue;
+  margin: 1em auto;
+}
