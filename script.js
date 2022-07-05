@@ -35,6 +35,11 @@ class Puzzle {
     }, []);
   }
 
+  isLastValid() {
+    const last_index = this.#allGuessedWords.length - 1;
+    return this.#allGuessedWords[last_index].isValid;
+  }
+
   isSolved() {
     return this.#validWords.length === this.correctGuesses().length;
   }
@@ -53,8 +58,21 @@ const endPuzzle = () => {
   submit.onclick = null;
 };
 
+const showCorrectWords = (puzzle, listElement) => {
+  if (!puzzle.isLastValid()) {
+    return;
+  };
+
+  const listItem = document.createElement('li');
+  const words = puzzle.correctGuesses();
+  listItem.innerText = words[words.length - 1];
+  listElement.appendChild(listItem);
+};
+
 const submitWord = (puzzle) => {
   puzzle.appendGuess();
+  const listElement = document.getElementById('guesses');
+  showCorrectWords(puzzle, listElement);
   if (puzzle.isSolved()) {
     endPuzzle();
   }

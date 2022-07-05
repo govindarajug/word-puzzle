@@ -3,13 +3,13 @@
 - [x] write a game controller
   - [x] initialize the controller in main
   - [ ] bind methods to the game controller
-- [ ] show correct guesses as list
 - [ ] Clear the background color after submitting the word
 - [ ] display the result
 - [ ] Generate the grid based on given words
 
 **DONE:**
 
+- [x] show correct guesses as list
 - [x] generate the puzzle view
 - [x] remove listeners after the puzzle solved
 - [x] Create an entity `puzzle`
