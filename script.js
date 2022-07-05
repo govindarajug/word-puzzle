@@ -47,8 +47,10 @@ const highlightElement = (event) => {
 const endPuzzle = () => {
   const cells = document.getElementsByClassName('cell');
   for (const cell of cells) {
-    cell.removeEventListener('click', highlightElement);
+    cell.onclick = null;
   }
+  const submit = document.getElementById('submit');
+  submit.onclick = null;
 };
 
 const submitWord = (puzzle) => {
@@ -58,21 +60,54 @@ const submitWord = (puzzle) => {
   }
 };
 
+const drawRowCells = (row, rowElement) => {
+  row.forEach(cell => {
+    const cellElement = document.createElement('div');
+    cellElement.className = 'cell';
+    cellElement.id = cell;
+    cellElement.innerText = cell;
+    rowElement.appendChild(cellElement);
+  });
+};
+
+const drawPuzzle = (grid, gridElement) => {
+  grid.forEach(row => {
+    const rowElement = document.createElement('div');
+    rowElement.className = 'row';
+    gridElement.appendChild(rowElement);
+    drawRowCells(row, rowElement);
+  });
+};
+
 const addClickListenerTo = (elements, listener) => {
   for (const element of elements) {
-    element.addEventListener('click', listener);
+    element.onclick = listener;
   }
+};
+
+const cellListener = (puzzle) => {
+  return (event) => {
+    puzzle.appendLetter(event.target.id);
+    highlightElement(event);
+  };
+};
+
+const puzzleController = (puzzle) => {
+  const grid = [['z', 'b', 'p'], ['o', 'a', 'm'], ['o', 'd', 'c']];
+
+  const gridElement = document.getElementById('grid');
+  drawPuzzle(grid, gridElement);
+
+  const cells = document.getElementsByClassName('cell');
+  addClickListenerTo(cells, cellListener(puzzle));
+
+  const submit = document.getElementById('submit');
+  addClickListenerTo([submit], () => submitWord(puzzle));
 };
 
 const main = () => {
   const puzzle = new Puzzle(['zoo', 'bad', 'am']);
-
-  const cells = document.getElementsByClassName('cell');
-  addClickListenerTo(cells, (event) => puzzle.appendLetter(event.target.id));
-  addClickListenerTo(cells, highlightElement);
-
-  const done = document.getElementById('done');
-  addClickListenerTo([done], (event) => submitWord(puzzle));
+  puzzleController(puzzle);
 };
 
 window.onload = main;

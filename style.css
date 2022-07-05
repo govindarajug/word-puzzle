@@ -9,7 +9,12 @@ body {
   width: 960px;
 }
 
-.grid {
+header>h1 {
+  text-align: center;
+  margin: 1em;
+}
+
+#grid {
   display: flex;
   flex-direction: column;
   margin: auto;
@@ -34,11 +39,15 @@ body {
   background-color: antiquewhite;
 }
 
-#done {
+#submit {
   border: 1px solid grey;
-  border-radius: 12%;
+  border-radius: 5%;
   width: fit-content;
   padding: 0.2em 0.5em;
   background-color: lightblue;
   margin: 1em auto;
+}
+
+#submit:hover {
+  background-color: lightskyblue;
 }

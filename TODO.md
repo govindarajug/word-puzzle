@@ -1,15 +1,17 @@
 **TODO:**
 
-- [ ] write a game controller
-  - [ ] initialize the controller in main
+- [x] write a game controller
+  - [x] initialize the controller in main
   - [ ] bind methods to the game controller
-- [ ] generate the puzzle view
 - [ ] show correct guesses as list
-- [ ] remove listeners after the puzzle solved
+- [ ] Clear the background color after submitting the word
 - [ ] display the result
+- [ ] Generate the grid based on given words
 
 **DONE:**
 
+- [x] generate the puzzle view
+- [x] remove listeners after the puzzle solved
 - [x] Create an entity `puzzle`
 - [x] Write script for taking the input
   - [x] Add click event on every cell of the grid
