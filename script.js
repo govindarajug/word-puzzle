@@ -40,13 +40,25 @@ class Puzzle {
     return this.#allGuessedWords[last_index].isValid;
   }
 
-  isSolved() {
+  #isSolved() {
     return this.#validWords.length === this.correctGuesses().length;
+  }
+
+  #areChancesOver() {
+    return this.#validWords.length + 2 <= this.#allGuessedWords.length;
+  }
+
+  isGameOver() {
+    return this.#isSolved() || this.#areChancesOver();
   }
 }
 
 const highlightElement = (event) => {
   event.target.style['background-color'] = 'burlywood';
+};
+
+const removeHighlight = (element) => {
+  element.style['background-color'] = 'antiquewhite';
 };
 
 const endPuzzle = () => {
@@ -73,8 +85,12 @@ const submitWord = (puzzle) => {
   puzzle.appendGuess();
   const listElement = document.getElementById('guesses');
   showCorrectWords(puzzle, listElement);
-  if (puzzle.isSolved()) {
+  if (puzzle.isGameOver()) {
     endPuzzle();
+  }
+  const cells = document.getElementsByClassName('cell');
+  for (const cell of cells) {
+    removeHighlight(cell);
   }
 };
 

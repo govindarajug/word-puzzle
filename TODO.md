@@ -1,14 +1,16 @@
 **TODO:**
 
+- [ ] activate selection only in row and column of first selection
 - [x] write a game controller
   - [x] initialize the controller in main
   - [ ] bind methods to the game controller
-- [ ] Clear the background color after submitting the word
 - [ ] display the result
 - [ ] Generate the grid based on given words
 
 **DONE:**
 
+- [x] take only specific number of guesses from user
+- [x] Clear the background color after submitting the word
 - [x] show correct guesses as list
 - [x] generate the puzzle view
 - [x] remove listeners after the puzzle solved
