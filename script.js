@@ -2,10 +2,12 @@ class Puzzle {
   #validWords;
   #guessedWord;
   #allGuessedWords;
+  #score;
   constructor(validWords) {
     this.#validWords = validWords;
     this.#guessedWord = '';
     this.#allGuessedWords = [];
+    this.#score = 0;
   }
 
   appendLetter(letter) {
@@ -13,15 +15,26 @@ class Puzzle {
     console.log(this.#guessedWord);
   }
 
-  isValidWord() {
+  #isValidWord() {
     return this.#validWords.includes(this.#guessedWord);
+  }
+
+  #updateScore() {
+    if (this.isLastValid()) {
+      this.#score += 5;
+    }
+  }
+
+  getScore() {
+    return this.#score;
   }
 
   appendGuess() {
     this.#allGuessedWords.push({
       word: this.#guessedWord,
-      isValid: this.isValidWord()
+      isValid: this.#isValidWord()
     });
+    this.#updateScore();
     console.log(this.#allGuessedWords);
     this.#guessedWord = '';
   }
@@ -61,13 +74,19 @@ const removeHighlight = (element) => {
   element.style['background-color'] = 'antiquewhite';
 };
 
-const endPuzzle = () => {
+const showScore = (score) => {
+  const scoreElement = document.getElementById('score');
+  scoreElement.innerText = `Your score is: ${score}`;
+};
+
+const endPuzzle = (puzzle) => {
   const cells = document.getElementsByClassName('cell');
   for (const cell of cells) {
     cell.onclick = null;
   }
   const submit = document.getElementById('submit');
   submit.onclick = null;
+  showScore(puzzle.getScore());
 };
 
 const showCorrectWords = (puzzle, listElement) => {
@@ -83,14 +102,14 @@ const showCorrectWords = (puzzle, listElement) => {
 
 const submitWord = (puzzle) => {
   puzzle.appendGuess();
-  const listElement = document.getElementById('guesses');
-  showCorrectWords(puzzle, listElement);
-  if (puzzle.isGameOver()) {
-    endPuzzle();
-  }
+  const guessList = document.getElementById('guesses');
+  showCorrectWords(puzzle, guessList);
   const cells = document.getElementsByClassName('cell');
   for (const cell of cells) {
     removeHighlight(cell);
+  }
+  if (puzzle.isGameOver()) {
+    endPuzzle(puzzle);
   }
 };
 
